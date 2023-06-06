@@ -99,6 +99,7 @@ def get_urls(0):
           print(counter)
         if counter - 30 > len(hike_urls):
           break
+    return hike_urls
 
 def crawl_wta_hikes(hike_urls, counter):
     # Fetch hike details from each URL
