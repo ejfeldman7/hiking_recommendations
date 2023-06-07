@@ -40,7 +40,7 @@ st.sidebar.write(
     __About__ \n
     This project was built from the amazing hiking resource of the [Washington Trails Association](https://www.wta.org/go-outside/hikes). Specs from the hikes and NMF vectors from the descriptions are used to compare hikes. 
     \n
-    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and eventually on his [website](ejfeldman.com)!
+    This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/), [Medium/TDS](https://ethan-feldman.medium.com/) and his [website](ejfeldman.com)!
     ''')
 # pickle the index associated with the value, to keep track if the radio button has been used
 pickle.dump(new_choice.index(choice), open('next.p', 'wb'))
@@ -77,7 +77,7 @@ elif choice == 'Filter':
 
 	# Create checkboxes for categorical fields
 	st.sidebar.markdown("### Categorical Filters")
-	regions = df['Region'].unique()
+	regions = df['General Region'].unique()
 	selected_regions = st.sidebar.multiselect("Regions", regions, default=regions)
 	tags = df['Tags'].explode().unique()
 	selected_tags = st.sidebar.multiselect("Tags", tags, default=tags)
@@ -85,7 +85,7 @@ elif choice == 'Filter':
 	# Apply filters
 	filtered_df = df[(df['Length'] >= length_min) & (df['Length'] <= length_max) &
 	                 (df['Elevation Gain'] >= elevation_min) & (df['Elevation Gain'] <= elevation_max) &
-	                 (df['Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
+	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
 	st.dataframe(filtered_df)
