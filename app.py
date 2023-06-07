@@ -143,9 +143,9 @@ elif choice == 'Recommender':
 	suggestions = filtered_df['Name'].tolist()
 
 	# Show the suggestions as a multiselect or selectbox widget
-	if user_input == '':
+	if user_input == '': 
 		st.write('''Excited to recommend a hike for you!''') 
-    else:
+	else:
     	selected_suggestions = st.selectbox('Suggestions', suggestions)
 
     # doc_topic = blindtfidf_topic
