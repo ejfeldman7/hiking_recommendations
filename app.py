@@ -5,11 +5,11 @@ import pickle
 import sklearn
 from sklearn.metrics import pairwise_distances
 
-with open('.pickle_barrel/vectorizer.pkl', 'rb') as read_file:
+with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
     vectorizer = pickle.load(read_file)
-with open('.pickle_barrel/tfidf_matrix.pkl', 'rb') as read_file:
+with open('./pickle_barrel/tfidf_matrix.pkl', 'rb') as read_file:
     tfidf_matrix = pickle.load(read_file)
-with open('.pickle_barrel/nmf_model.pkl', 'rb') as read_file:
+with open('./pickle_barrel/nmf_model.pkl', 'rb') as read_file:
     nmf_model = pickle.load(read_file)
 
 # create a button in the side bar that will move to the next page/radio button choice
