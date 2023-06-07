@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 # create a button in the side bar that will move to the next page/radio button choice
 next = st.sidebar.button('Next on list')
@@ -105,4 +106,3 @@ elif choice == 'Recommender':
 
 	# You can access the selected suggestions using 'selected_suggestions' variable
 	st.write('Selected Suggestions:', selected_suggestions)
-	
