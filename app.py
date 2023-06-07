@@ -50,7 +50,7 @@ if choice == 'Home':
     st.title('Welcome to a prototype tool for finding your next hike in Washington!')
     '''
     This project was built from the amazing hiking resource of the Washington Trails Association: https://www.wta.org/go-outside/hikes. 
-    The detailed hike descriptions were used to create nine-dimensional hike vectors using non-negative matrix factorization on a TF-IDF encoding of each coffee's review. This enabled comparison between coffees by their difference or similarity across the derived flavor spectrum.
+    The detailed hike descriptions were used to create nine-dimensional hike vectors using non-negative matrix factorization on a TF-IDF encoding of each hike's description. This enabled comparison between hikes by their difference or similarity across characteristics.
     These vectors and additional features were then used for recommendations of hikes with similar vectors, predicting scores, and more.  \r\n
     __On the side bar__ on the left you will find a few different application  \r\n
     __Below__ is a quick table of contents for the different pages of the site
