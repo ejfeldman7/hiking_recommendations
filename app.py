@@ -77,16 +77,25 @@ elif choice == 'Filter':
 	# Display the selected values
 	length_value = st.sidebar.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length))
 
-	# Adjust the displayed value if it exceeds 100
+	# Adjust the displayed value if it exceeds 15
 	length_max = length_value[1] if length_value[1] < 15 else float(1200.0)
 
 	# Display the selected Range	
 	st.write('Selected Hike Length Range (mi):', length_value[0], 'to', length_max)
-	# length_min = st.sidebar.slider("", ), float(df['Length'].max()), float(df['Length'].min()))
-	# length_max = st.sidebar.slider("Maximum Length", float(df['Length'].min()), float(df['Length'].max()), float(df['Length'].max()))
-	elevation_min = st.sidebar.slider("Minimum Elevation Gain", int(df['Elevation Gain'].min()), int(df['Elevation Gain'].max()), int(df['Elevation Gain'].min()))
-	elevation_max = st.sidebar.slider("Maximum Elevation Gain", int(df['Elevation Gain'].min()), int(df['Elevation Gain'].max()), int(df['Elevation Gain'].max()))
 
+	# Set the minimum and maximum values for the slider
+	min_gain = float(df['Elevation Gain'].min())
+	max_gain = float(10000) #float(df['Length'].max())
+
+	# Display the selected values
+	gain_value = st.sidebar.slider('Elevation Gain Range (0 to 10k+ ft)', min_gain, max_gain, (min_gain, max_gain))
+
+	# Adjust the displayed value if it exceeds 10000
+	gain_max = gain_value[1] if gain_value[1] < 10000 else float(27000.0)
+
+	# Display the selected Range	
+	st.write('Selected Elevation Gain Range (ft):', gain_value[0], 'to', gain_max)
+	
 	# Create checkboxes for categorical fields
 	st.sidebar.markdown("### Categorical Filters")
 	regions = df['General Region'].unique()
@@ -96,7 +105,7 @@ elif choice == 'Filter':
 
 	# Apply filters
 	filtered_df = df[(df['Length'] >= length_value[0]) & (df['Length'] <= length_max) &
-	                 (df['Elevation Gain'] >= elevation_min) & (df['Elevation Gain'] <= elevation_max) &
+	                 (df['Elevation Gain'] >= gain_value[0]) & (df['Elevation Gain'] <= gain_max) &
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
