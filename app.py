@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import pickle
+import sklearn
 from sklearn.metrics import pairwise_distances
 
 with open('.pickle_barrel/vectorizer.pickle', 'rb') as read_file:
