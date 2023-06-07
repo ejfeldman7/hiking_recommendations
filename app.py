@@ -129,7 +129,7 @@ elif choice == 'Filter':
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')
 	st.markdown("## Get a Hike Recommendation")
-	st.markdown("##### First,type in the name of a hike you have enjoyed")
+	st.markdown("##### First,type in the name of a hike and hit enter")
 	st.markdown("##### Then, select the hike from the drop down")
 
 	# Create a text entry field
@@ -142,7 +142,6 @@ elif choice == 'Recommender':
 	suggestions = filtered_df['Name'].tolist()
 
 	# Show the suggestions as a multiselect or selectbox widget
-	selected_suggestions = st.multiselect('Suggestions', suggestions)
+	selected_suggestions = st.selectbox('Suggestions', suggestions)
 
-	# You can access the selected suggestions using 'selected_suggestions' variable
-	st.write('Selected Suggestions:', selected_suggestions)
+	
