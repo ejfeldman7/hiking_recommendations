@@ -69,13 +69,13 @@ elif choice == 'Filter':
 	df = pd.read_parquet('./data/hikes.parquet')
 
 	# Create sliders for numeric fields
-	st.sidebar.markdown("### Numeric Filters")
+	st.markdown("### Numeric Filters")
 	# Set the minimum and maximum values for the slider
 	min_length = float(df['Length'].min())
 	max_length = float(15.0) #float(df['Length'].max())
 
 	# Display the selected values
-	length_value = st.sidebar.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length), format='%.1f')
+	length_value = st.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length), format='%.1f')
 
 	# Adjust the displayed value if it exceeds 15
 	length_max = length_value[1] if length_value[1] < 15 else float(1200.0)
@@ -88,7 +88,7 @@ elif choice == 'Filter':
 	max_gain = float(10000) #float(df['Length'].max())
 
 	# Display the selected values
-	gain_value = st.sidebar.slider('Elevation Gain Range (0 to 10k+ ft)', min_gain, max_gain, (min_gain, max_gain), format='%.1f')
+	gain_value = st.slider('Elevation Gain Range (0 to 10k+ ft)', min_gain, max_gain, (min_gain, max_gain), format='%.1f')
 
 	# Adjust the displayed value if it exceeds 10000
 	gain_max = gain_value[1] if gain_value[1] < 10000 else float(27000.0)
@@ -101,19 +101,19 @@ elif choice == 'Filter':
 	max_rating = float(5) #float(df['Length'].max())
 
 	# Display the selected values
-	rating_value = st.sidebar.slider('Star Rating Range (0 to 5)', min_rating, max_rating, (min_rating, max_rating), format='%.1f')
+	rating_value = st.slider('Star Rating Range (0 to 5)', min_rating, max_rating, (min_rating, max_rating), format='%.1f')
 
 	# Display the selected Range	
-	st.write('Selected Star Rating Range:', rating_value[0], 'to', rating_max)
+	st.write('Selected Star Rating Range:', rating_value[0], 'to', rating_value[1])
 	
 	# Create checkboxes for categorical fields
-	st.sidebar.markdown("### Categorical Filters")
+	st.markdown("### Categorical Filters")
 	regions = df['General Region'].unique()
-	selected_regions = st.sidebar.multiselect("Regions", regions, default=regions)
+	selected_regions = st.multiselect("Regions", regions, default=regions)
 	tags = df['Tags'].explode().unique()
-	selected_tags = st.sidebar.multiselect("Tags", tags, default=tags)
+	selected_tags = st.multiselect("Tags", tags, default=tags)
 	difficulty = df['Difficulty'].unique()
-	selected_tags = st.sidebar.multiselect("Difficulty", tags, default=difficulty)
+	selected_tags = st.multiselect("Difficulty", tags, default=difficulty)
 
 
 	# Apply filters
