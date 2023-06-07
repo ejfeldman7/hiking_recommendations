@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 import os
 import pickle
+from sklearn.metrics import pairwise_distances
+
+with open('.pickle_barrel/vectorizer.pickle', 'rb') as read_file:
+    vectorizer = pickle.load(read_file)
+with open('.pickle_barrel/tfidf_matrix.pickle', 'rb') as read_file:
+    tfidf_matrix = pickle.load(read_file)
+with open('.pickle_barrel/nmf_model.pickle', 'rb') as read_file:
+    nmf_model = pickle.load(read_file)
 
 # create a button in the side bar that will move to the next page/radio button choice
 # next = st.sidebar.button('Next on list')
@@ -148,15 +156,18 @@ elif choice == 'Recommender':
 	else:
 		selected_suggestions = st.selectbox('Suggestions', suggestions)
 
-    # doc_topic = blindtfidf_topic
-    # vt = blindtfidf.transform(text).todense()
-    # tt1 = nmf_tfidfblind.transform(vt)
+		text_df = pd.read_parquet('./data/text_data.parquet')
+		hike_to_find = [selected_suggestions]
+		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
+		nmf_features = nmf_model.transform(tfidf_matrix)
+		vt = vectorizer.transform(text).todense()
+		tt1 = nmf_model.transform(np.asarray(vt))
 
-    #Find Recommendations
-    # indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
-    # recs = list(indices[0][0:4])
- 
- 	# if something goes here:
-  #           st.write('Based on your input hike, I recommend you try:','\n\n',filtered_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n\n',filtered_df.iloc[recs[0]].Description)
-		# 	st.write('For more information, visit:','\n\n',filtered_df.iloc[recs[0]]['Hike ID'])
+	# #Find Recommendations
+		indices = pairwise_distances(tt1.reshape(1,-1),nmf_features,metric='cosine').argsort()
+		recs = list(indices[0][1:4])
+	 
+	 	if len(text_df.iloc[recs[0]]['Name'])>1:
+	            st.write('Based on your input hike, I recommend you try:','\n\n',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n\n',text_df.iloc[recs[0]].Description)
+				st.write('For more information, visit:','\n\n',text_df.iloc[recs[0]]['Hike ID'])
 
