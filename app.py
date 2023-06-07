@@ -67,9 +67,9 @@ if choice == 'Home':
 elif choice == 'Filter':
 
 	df = pd.read_parquet('./data/hikes.parquet')
-
+	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
-	st.markdown("### Numeric Filters")
+	st.markdown("##### Numeric Filters")
 	# Set the minimum and maximum values for the slider
 	min_length = float(df['Length'].min())
 	max_length = float(15.0) #float(df['Length'].max())
@@ -81,7 +81,7 @@ elif choice == 'Filter':
 	length_max = length_value[1] if length_value[1] < 15 else float(1200.0)
 
 	# Display the selected Range	
-	st.write('Selected Hike Length Range (mi):', length_value[0], 'to', length_max)
+	# st.write('Selected Hike Length Range (mi):', length_value[0], 'to', length_max)
 
 	# Set the minimum and maximum values for the slider
 	min_gain = float(df['Elevation Gain'].min())
@@ -94,7 +94,7 @@ elif choice == 'Filter':
 	gain_max = gain_value[1] if gain_value[1] < 10000 else float(27000.0)
 
 	# Display the selected Range	
-	st.write('Selected Elevation Gain Range (ft):', gain_value[0], 'to', gain_max)
+	# st.write('Selected Elevation Gain Range (ft):', gain_value[0], 'to', gain_max)
 
 	# Set the minimum and maximum values for the slider
 	min_rating = float(0)
@@ -104,10 +104,10 @@ elif choice == 'Filter':
 	rating_value = st.slider('Star Rating Range (0 to 5)', min_rating, max_rating, (min_rating, max_rating), format='%.1f')
 
 	# Display the selected Range	
-	st.write('Selected Star Rating Range:', rating_value[0], 'to', rating_value[1])
+	# st.write('Selected Star Rating Range:', rating_value[0], 'to', rating_value[1])
 	
 	# Create checkboxes for categorical fields
-	st.markdown("### Categorical Filters")
+	st.markdown("##### Categorical Filters")
 	regions = df['General Region'].unique()
 	selected_regions = st.multiselect("Regions", regions, default=regions)
 	tags = df['Tags'].explode().unique()
