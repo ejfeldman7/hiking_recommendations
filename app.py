@@ -75,7 +75,7 @@ elif choice == 'Filter':
 	max_length = float(df['Length'].max())
 
 	# Display the selected values
-	length_value = st.sidebar.slider('Length Range', min_length, max_length, (min_length, max_length))
+	length_value = st.sidebar.slider('Length Range', min_length, 50, (min_length, '50+'))
 
 	# Adjust the displayed value if it exceeds 100
 	length_max = max_length if length_value[1] > 100 else length_value[1]
