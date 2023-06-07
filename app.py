@@ -133,6 +133,7 @@ elif choice == 'Recommender':
 	st.markdown("##### Then, select the hike from the drop down")
 
 	# Create a text entry field
+	user_input == ''
 	user_input = st.text_input('Type Here')
 
 	# Filter the dataframe based on the user input
@@ -144,7 +145,7 @@ elif choice == 'Recommender':
 	# Show the suggestions as a multiselect or selectbox widget
 	if user_input == '':
 		st.write('''
-        Excited to recommend a coffee for you!''') 
+        Excited to recommend a hike for you!''') 
     else:
 		selected_suggestions = st.selectbox('Suggestions', suggestions)
 
