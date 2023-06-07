@@ -73,12 +73,12 @@ elif choice == 'Filter':
 	# Set the minimum and maximum values for the slider
 	min_value = float(df['Length'].min())
 	max_value = float(df['Length'].max())
+	
+	# Display the selected values
+	slider_value = st.sidebar.slider('Length Range', min_value, max_value, (min_value, max_value))
 
 	# Adjust the displayed value if it exceeds 100
 	slider_max = max_value if slider_value[1] > 100 else slider_value[1]
-
-	# Display the selected values
-	start_value, end_value = st.sidebar.slider('Length Range', min_value, max_value, (min_value, max_value))
 
 	# Display the selected Range	
 	st.write('Selected Range:', slider_value[0], 'to', slider_max)
