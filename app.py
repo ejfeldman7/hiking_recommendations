@@ -156,9 +156,9 @@ elif choice == 'Recommender':
 		st.write('''Excited to recommend a hike for you!''') 
 	else:
 		selected_suggestions = st.selectbox('Suggestions', suggestions)
-
+		st.write(f'Searching for recommendation based off of {selected_suggestions}...')
 		text_df = pd.read_parquet('./data/text_data.parquet')
-		hike_to_find = [selected_suggestions]
+		hike_to_find = selected_suggestions
 		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
 		nmf_features = nmf_model.transform(tfidf_matrix)
 		vt = vectorizer.transform(text).todense()
