@@ -4,7 +4,7 @@ import os
 import pickle
 
 # create a button in the side bar that will move to the next page/radio button choice
-next = st.sidebar.button('Next on list')
+# next = st.sidebar.button('Next on list')
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
