@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import pickle
 
 # create a button in the side bar that will move to the next page/radio button choice
 next = st.sidebar.button('Next on list')
