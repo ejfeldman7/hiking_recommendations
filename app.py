@@ -75,7 +75,7 @@ elif choice == 'Filter':
 	max_length = float(15.0) #float(df['Length'].max())
 
 	# Display the selected values
-	length_value = st.sidebar.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length))
+	length_value = st.sidebar.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length), format='%.1f')
 
 	# Adjust the displayed value if it exceeds 15
 	length_max = length_value[1] if length_value[1] < 15 else float(1200.0)
@@ -88,7 +88,7 @@ elif choice == 'Filter':
 	max_gain = float(10000) #float(df['Length'].max())
 
 	# Display the selected values
-	gain_value = st.sidebar.slider('Elevation Gain Range (0 to 10k+ ft)', min_gain, max_gain, (min_gain, max_gain))
+	gain_value = st.sidebar.slider('Elevation Gain Range (0 to 10k+ ft)', min_gain, max_gain, (min_gain, max_gain), format='%.1f')
 
 	# Adjust the displayed value if it exceeds 10000
 	gain_max = gain_value[1] if gain_value[1] < 10000 else float(27000.0)
