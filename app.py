@@ -75,13 +75,13 @@ elif choice == 'Filter':
 	max_length = float(15.0) #float(df['Length'].max())
 
 	# Display the selected values
-	length_value = st.sidebar.slider('Length Range (0 to 15+)', min_length, max_length, (min_length, max_length))
+	length_value = st.sidebar.slider('Length Range (0 to 15+ mi)', min_length, max_length, (min_length, max_length))
 
 	# Adjust the displayed value if it exceeds 100
-	length_max = max_length if length_value[1] < 15 else float(1200.0)
+	length_max = length_value[1] if length_value[1] < 15 else float(1200.0)
 
 	# Display the selected Range	
-	st.write('Selected Range:', length_value[0], 'to', length_max)
+	st.write('Selected Hike Length Range (mi):', length_value[0], 'to', length_max)
 	# length_min = st.sidebar.slider("", ), float(df['Length'].max()), float(df['Length'].min()))
 	# length_max = st.sidebar.slider("Maximum Length", float(df['Length'].min()), float(df['Length'].max()), float(df['Length'].max()))
 	elevation_min = st.sidebar.slider("Minimum Elevation Gain", int(df['Elevation Gain'].min()), int(df['Elevation Gain'].max()), int(df['Elevation Gain'].min()))
