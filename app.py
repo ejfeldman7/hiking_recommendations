@@ -113,14 +113,14 @@ elif choice == 'Filter':
 	tags = df['Tags'].explode().unique()
 	selected_tags = st.multiselect("Tags", tags, default=tags)
 	difficulty = df['Difficulty'].unique()
-	selected_difficulty = st.multiselect("Difficulty", tags, default=difficulty)
+	selected_difficulty = st.multiselect("Difficulty", difficulty, default=difficulty)
 
 
 	# Apply filters
 	filtered_df = df[(df['Length'] >= length_value[0]) & (df['Length'] <= length_max) &
 	                 (df['Elevation Gain'] >= gain_value[0]) & (df['Elevation Gain'] <= gain_max) &
 	                 (df['Rating'] >= rating_value[0]) & (df['Rating'] <= rating_value[1]) &
-	                 (df['Difficulty'].isin(selected_difficulty) ) &
+	                 (df['Difficulty'].isin(selected_difficulty)) &
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
