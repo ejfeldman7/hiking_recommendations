@@ -128,9 +128,12 @@ elif choice == 'Filter':
 
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')
+	st.markdown("## Get a Hike Recommendation")
+	st.markdown("##### First,type in the name of a hike you have enjoyed")
+	st.markdown("##### Then, select the hike from the drop down")
 
 	# Create a text entry field
-	user_input = st.text_input('Type in the Name of a Hike You Have Enjoyed')
+	user_input = st.text_input('Type Here')
 
 	# Filter the dataframe based on the user input
 	filtered_df = df[df['Name'].str.contains(user_input, case=False)]
