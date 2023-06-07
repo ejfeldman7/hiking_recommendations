@@ -144,10 +144,9 @@ elif choice == 'Recommender':
 
 	# Show the suggestions as a multiselect or selectbox widget
 	if user_input == '':
-		st.write('''
-        Excited to recommend a hike for you!''') 
+		st.write('''Excited to recommend a hike for you!''') 
     else:
-		selected_suggestions = st.selectbox('Suggestions', suggestions)
+    	selected_suggestions = st.selectbox('Suggestions', suggestions)
 
     # doc_topic = blindtfidf_topic
     # vt = blindtfidf.transform(text).todense()
