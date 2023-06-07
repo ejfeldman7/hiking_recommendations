@@ -95,6 +95,16 @@ elif choice == 'Filter':
 
 	# Display the selected Range	
 	st.write('Selected Elevation Gain Range (ft):', gain_value[0], 'to', gain_max)
+
+	# Set the minimum and maximum values for the slider
+	min_rating = float(0)
+	max_rating = float(5) #float(df['Length'].max())
+
+	# Display the selected values
+	rating_value = st.sidebar.slider('Star Rating Range (0 to 5)', min_rating, max_rating, (min_rating, max_rating), format='%.1f')
+
+	# Display the selected Range	
+	st.write('Selected Star Rating Range:', rating_value[0], 'to', rating_max)
 	
 	# Create checkboxes for categorical fields
 	st.sidebar.markdown("### Categorical Filters")
@@ -102,10 +112,14 @@ elif choice == 'Filter':
 	selected_regions = st.sidebar.multiselect("Regions", regions, default=regions)
 	tags = df['Tags'].explode().unique()
 	selected_tags = st.sidebar.multiselect("Tags", tags, default=tags)
+	difficulty = df['Difficulty'].unique()
+	selected_tags = st.sidebar.multiselect("Difficulty", tags, default=difficulty)
+
 
 	# Apply filters
 	filtered_df = df[(df['Length'] >= length_value[0]) & (df['Length'] <= length_max) &
 	                 (df['Elevation Gain'] >= gain_value[0]) & (df['Elevation Gain'] <= gain_max) &
+	                 (df['Rating'] >= rating_value[0]) & (df['Rating'] <= rating_value[1]) &
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
