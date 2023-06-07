@@ -133,7 +133,7 @@ elif choice == 'Recommender':
 	st.markdown("##### Then, select the hike from the drop down")
 
 	# Create a text entry field
-	user_input == ''
+	user_input = ''
 	user_input = st.text_input('Type Here')
 
 	# Filter the dataframe based on the user input
