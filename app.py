@@ -24,13 +24,13 @@ else:
 
 # this is the second tricky bit, check to see if the person has clicked the
 # next button and increment our index tracker (next_clicked)
-if next:
-    #increment value to get to the next page
-    next_clicked = next_clicked +1
+# if next:
+#     #increment value to get to the next page
+#     next_clicked = next_clicked +1
 
-    # check if you are at the end of the list of pages again
-    if next_clicked == len(new_choice):
-        next_clicked = 0 # go back to the beginning i.e. homepage
+#     # check if you are at the end of the list of pages again
+#     if next_clicked == len(new_choice):
+#         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
 choice = st.sidebar.radio("go to",('Home','Filter','Recommender'), index=next_clicked)
