@@ -71,17 +71,17 @@ elif choice == 'Filter':
 	# Create sliders for numeric fields
 	st.sidebar.markdown("### Numeric Filters")
 	# Set the minimum and maximum values for the slider
-	min_value = float(df['Length'].min())
-	max_value = float(df['Length'].max())
-	
+	min_length = float(df['Length'].min())
+	max_length = float(df['Length'].max())
+
 	# Display the selected values
-	slider_value = st.sidebar.slider('Length Range', min_value, max_value, (min_value, max_value))
+	length_value = st.sidebar.slider('Length Range', min_length, max_length, (min_length, max_length))
 
 	# Adjust the displayed value if it exceeds 100
-	slider_max = max_value if slider_value[1] > 100 else slider_value[1]
+	length_max = max_length if length_value[1] > 100 else length_value[1]
 
 	# Display the selected Range	
-	st.write('Selected Range:', slider_value[0], 'to', slider_max)
+	st.write('Selected Range:', length_value[0], 'to', length_max)
 	# length_min = st.sidebar.slider("", ), float(df['Length'].max()), float(df['Length'].min()))
 	# length_max = st.sidebar.slider("Maximum Length", float(df['Length'].min()), float(df['Length'].max()), float(df['Length'].max()))
 	elevation_min = st.sidebar.slider("Minimum Elevation Gain", int(df['Elevation Gain'].min()), int(df['Elevation Gain'].max()), int(df['Elevation Gain'].min()))
@@ -95,7 +95,7 @@ elif choice == 'Filter':
 	selected_tags = st.sidebar.multiselect("Tags", tags, default=tags)
 
 	# Apply filters
-	filtered_df = df[(df['Length'] >= length_min) & (df['Length'] <= length_max) &
+	filtered_df = df[(df['Length'] >= length_value[0]) & (df['Length'] <= length_max) &
 	                 (df['Elevation Gain'] >= elevation_min) & (df['Elevation Gain'] <= elevation_max) &
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
