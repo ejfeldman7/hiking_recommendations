@@ -142,6 +142,21 @@ elif choice == 'Recommender':
 	suggestions = filtered_df['Name'].tolist()
 
 	# Show the suggestions as a multiselect or selectbox widget
-	selected_suggestions = st.selectbox('Suggestions', suggestions)
+	if user_input == '':
+		st.write('''
+        Excited to recommend a coffee for you!''') 
+    else:
+		selected_suggestions = st.selectbox('Suggestions', suggestions)
 
+    # doc_topic = blindtfidf_topic
+    # vt = blindtfidf.transform(text).todense()
+    # tt1 = nmf_tfidfblind.transform(vt)
+
+    #Find Recommendations
+    # indices = pairwise_distances(tt1.reshape(1,-1),doc_topic,metric='cosine').argsort()
+    # recs = list(indices[0][0:4])
+ 
+ 	# if something goes here:
+  #           st.write('Based on your input hike, I recommend you try:','\n\n',filtered_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n\n',filtered_df.iloc[recs[0]].Description)
+		# 	st.write('For more information, visit:','\n\n',filtered_df.iloc[recs[0]]['Hike ID'])
 
