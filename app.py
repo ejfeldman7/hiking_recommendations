@@ -273,7 +273,7 @@ elif choice == 'Recommender':
 
 		## Find Recommendations By Topic Model
 		indices = pairwise_distances(tt1.reshape(1,-1),nmf_features[closest_indices],metric='cosine').argsort()
-		recs = list(indices[0][1:5])
+		recs = list(indices[0][0:6])
 
 		if len(text_df.iloc[recs[0]]['Name'])>1:
 			st.write('Based on your input hike, I recommend you try:',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n',text_df.iloc[recs[0]].Description)
