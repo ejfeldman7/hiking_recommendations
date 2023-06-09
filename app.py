@@ -141,13 +141,27 @@ elif choice == 'Filter':
 
 elif choice == 'Visualizations':
 	df = pd.read_parquet('./data/hikes.parquet')
+	
 	data = df[['General Region','Specific Region','Rating','Votes','Length','Elevation Gain',
  		'One Way','Round Trip','Highest Point','Tags', 'Difficulty']]
-	# Example: Selectbox to choose the feature
-	selected_feature = st.selectbox('Select a feature', data.columns)
-
+	
 	# Example: Radio buttons to choose the visualization type
 	visualization_type = st.radio('Select visualization type', ['Line Plot', 'Bar Plot'])
+
+	# Example: Selectbox to choose the feature
+	if visualization_type == 'Line Plot':
+		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']))
+		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']))
+		plt.plot(df[x], df[y])
+		plt.xlabel(x)
+		plt.ylabel(y)
+		st.pyplot()
+
+	elif visualization_type == 'Bar Plot':
+		selected_feature = st.selectbox('Select a feature', data.columns)
+		freq = data[selected_feature].value_counts()
+		st.bar_chart(freq)
+		
 
 	# Example: Line plot
 	if visualization_type == 'Line Plot':
