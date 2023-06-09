@@ -188,7 +188,7 @@ elif choice == 'Visualizations':
  		'One Way','Round Trip','Highest Point','Tags', 'Difficulty']]
 	
 	# Example: Radio buttons to choose the visualization type
-	visualization_type = st.radio('Select visualization type', ['Bar Plot', 'Scatter Plot', 'Box Plot'])
+	visualization_type = st.radio('Select visualization type', ['Frequency Plot/Histogram', 'Scatter Plot', 'Box Plot'])
 
 	# Example: Selectbox to choose the feature
 	# if visualization_type == 'Line Plot':
