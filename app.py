@@ -208,7 +208,7 @@ elif choice == 'Visualizations':
 		ax.bar(bins[:-1], freq, width=np.diff(bins), align='edge')
 		st.pyplot(fig)
 
-	elif chart_type == 'Scatter Plot':
+	elif visualization_type == 'Scatter Plot':
 		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
 		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
 
@@ -217,7 +217,7 @@ elif choice == 'Visualizations':
 		plt.ylabel(y)
 		st.pyplot()
 
-	elif chart_type == 'Box Plot':
+	elif visualization_type == 'Box Plot':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
 		sns.boxplot(data=data, x=feature)
 		st.pyplot()
