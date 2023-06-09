@@ -8,6 +8,7 @@ from sklearn.metrics import pairwise_distances
 
 import matplotlib.pyplot as plt
 import plotly.express as px
+import seaborn as sns
 
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
     vectorizer = pickle.load(read_file)
@@ -146,21 +147,35 @@ elif choice == 'Visualizations':
  		'One Way','Round Trip','Highest Point','Tags', 'Difficulty']]
 	
 	# Example: Radio buttons to choose the visualization type
-	visualization_type = st.radio('Select visualization type', ['Line Plot', 'Bar Plot'])
+	visualization_type = st.radio('Select visualization type', ['Bar Plot', 'Scatter Plot', 'Box Plot'])
 
 	# Example: Selectbox to choose the feature
-	if visualization_type == 'Line Plot':
+	# if visualization_type == 'Line Plot':
+	# 	x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
+	# 	y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
+	# 	plt.plot(data[x], data[y])
+	# 	plt.xlabel(x)
+	# 	plt.ylabel(y)
+	# 	st.pyplot()
+
+	if visualization_type == 'Bar Plot':
+		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
+		freq = data[selected_feature].value_counts()
+		st.bar_chart(freq)
+
+	elif chart_type == 'Scatter Plot':
 		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
 		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
-		plt.plot(data[x], data[y])
+
+		plt.scatter(df[x], df[y])
 		plt.xlabel(x)
 		plt.ylabel(y)
 		st.pyplot()
 
-	elif visualization_type == 'Bar Plot':
-		selected_feature = st.selectbox('Select a feature', data.columns)
-		freq = data[selected_feature].value_counts()
-		st.bar_chart(freq)
+	elif chart_type == 'Box Plot':
+		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
+		sns.boxplot(data=data, x=feature)
+		st.pyplot()
 
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')
