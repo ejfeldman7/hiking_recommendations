@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.metrics import pairwise_distances
 
 
-def scaler(df, scaler_type = 'MinMax', numeric_cols: list, object_cols: list, tag_cols: list):
+def scaler(df, scaler_type: object, numeric_cols: list, object_cols: list, tag_cols: list):
 	'''
 	:param df: dataframe of features
 	:type df: Pandas dataframe
