@@ -16,7 +16,7 @@ import seaborn as sns
 import openai
 
 from utils.processing import scaler
-from utils.feature_lists import object_cols, numeric_cols, tag_cols
+from utils.feature_lists import object_cols, numeric_cols, tag_cols, fewer_numeric, fewer_object
 from utils.data import load_data
 
 
@@ -278,8 +278,8 @@ elif choice == 'Recommender':
 		# Select the input vector
 		input_index = df[df.Name == hike_to_find].index[0]
 
-		# Select the features to use for distance calculation
-		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tag_cols = tag_cols)
+		# Select the features to use for distance calculation , 
+		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = fewer_numeric, object_cols = fewer_object, tag_cols = tag_cols)
 
 		# Weight some features more heavily
 		features_df['Length'] = features_df['Length'] * 4 * length_mult
