@@ -255,14 +255,21 @@ elif choice == 'Recommender':
 		input_vector = features_df.iloc[input_index]
 		input_index_2d = np.reshape(input_vector, (1, -1))
 
+		# Remove rows with null values
+		features_df = features_df.dropna()
+
+		# Extract values and index separately
+		features_values = features_df.values
+		features_index = features_df.index
+
 		# Calculate pairwise distances between the input vector and all records in the dataframe
-		distances = pairwise_distances(features_df.dropna().values, input_index_2d)
+		distances = pairwise_distances(features_values, input_index_2d)
 
 		# Get the indices of the 25 closest records
 		closest_indices = np.argsort(distances.flatten())[1:25]
 
-		# Get the closest records from the dataframe
-		closest_records = df.iloc[closest_indices]
+		# Get the closest records from the dataframe using the extracted index
+		closest_records = df.loc[features_index[closest_indices]]
 
 		# Filter NMF matrix to records above
 		nmf_features = nmf_model.transform(tfidf_matrix)
