@@ -147,7 +147,7 @@ elif choice == 'Filter':
 	# Add a checkbox to show/hide the location input fields
 	show_location_input = st.checkbox("Enter location")
 
-	Process the input and geocoder	
+	# Process the input and geocoder	
 	if show_location_input:
 
 		# Create a geocoder instance
