@@ -276,7 +276,7 @@ elif choice == 'Recommender':
 		recs = list(indices[0][1:5])
 
 		if len(text_df.iloc[recs[0]]['Name'])>1:
-			st.write('Based on your input hike, I recommend you try:',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n,text_df.iloc[recs[0]].Description)
+			st.write('Based on your input hike, I recommend you try:',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n',text_df.iloc[recs[0]].Description)
 			st.write('For more information, visit:',text_df.iloc[recs[0]]['Hike ID'])
 
 			st.write('Or, another option I would recommend you try is:',text_df.iloc[recs[1]]['Name'],'\n\n','It could be desribed as:','\n',text_df.iloc[recs[1]].Description)
