@@ -199,7 +199,7 @@ elif choice == 'Visualizations':
 	# 	plt.ylabel(y)
 	# 	st.pyplot()
 
-	if visualization_type == 'Frequency Plot/Histogram'
+	if visualization_type == 'Frequency Plot/Histogram':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
 		bin_size = st.slider('Select bin size', min_value=int(np.floor(df[selected_feature].min())), max_value=int(np.floor(df[selected_feature].max())), value=np.int64(10))  # Adjust the min/max values as needed
 
