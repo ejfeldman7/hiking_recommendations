@@ -201,7 +201,8 @@ elif choice == 'Visualizations':
 
 	if visualization_type == 'Frequency Plot/Histogram':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
-		bin_size = st.slider('Select bin size', min_value=int(np.floor(df[selected_feature].min())), max_value=int(np.floor(df[selected_feature].max())), value=int(10))  # Adjust the min/max values as needed
+		max_val = int(df[selected_feature].max().astype(str).str.split('.')[0])
+		bin_size = st.slider('Select bin size', min_value=0, max_value=max_val, value=10)  # Adjust the min/max values as needed
 
 		freq, bins = np.histogram(data[selected_feature], bins=bin_size)
 		fig, ax = plt.subplots()
