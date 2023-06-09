@@ -220,8 +220,7 @@ elif choice == 'Visualizations':
 
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')
-	st.markdown("# Get a Hike Recommendation - Similar Descriptions")
-	st.markdown("####**Not Using Hike Stats Yet (length, elevation, etc)**")
+	st.markdown("# Get a Hike Recommendation")
 	st.markdown("##### First, type in the name of a hike and hit enter")
 	st.markdown("##### Then, select the hike from the drop down")
 
