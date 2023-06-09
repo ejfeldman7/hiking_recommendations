@@ -137,7 +137,7 @@ elif choice == 'Filter':
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
-	st.dataframe(filtered_df
+	st.dataframe(filtered_df)
 
 elif choice == 'Visualizations':
 	df = pd.read_parquet('./data/hikes.parquet')
