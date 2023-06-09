@@ -15,6 +15,7 @@ import seaborn as sns
 
 from utils.processing import scaler
 from utils.feature_lists import object_cols, numeric_cols, tag_cols
+from utils.data import load_data
 
 
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
@@ -86,8 +87,7 @@ if choice == 'Home':
     '''
     
 elif choice == 'Filter':
-
-	df = pd.read_parquet('./data/hikes.parquet')
+	df = load_data('./data/hikes.parquet', 'parquet')
 	# st.dataframe(df)
 	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
@@ -184,7 +184,7 @@ elif choice == 'Filter':
 	st.dataframe(filtered_df)
 
 elif choice == 'Visualizations':
-	df = pd.read_parquet('./data/hikes.parquet')
+	df = load_data('./data/hikes.parquet', 'parquet')
 	
 	data = df[['General Region','Specific Region','Rating','Votes','Length','Elevation Gain',
  		'One Way','Round Trip','Highest Point','Tags', 'Difficulty']]
@@ -243,7 +243,7 @@ elif choice == 'Visualizations':
 		st.pyplot()
 
 elif choice == 'Recommender':
-	df = pd.read_parquet('./data/hikes.parquet')
+	df = load_data('./data/hikes.parquet', 'parquet')
 	st.markdown("# Get a Hike Recommendation")
 	st.markdown("##### First, type in the name of a hike and hit enter")
 	st.markdown("##### Then, select the hike from the drop down")
@@ -266,7 +266,7 @@ elif choice == 'Recommender':
 		st.write(f'Searching for recommendation based off of {selected_suggestions}...')
 		elevation_mult = st.slider('How important is having a similar elevation_gain', 1, 5, 3)
 		length_mult = st.slider('How important is having a length of hike', 1, 5, 3)
-		text_df = pd.read_parquet('./data/text_data.parquet')
+		text_df = load_data('./data/text_data.parquet', 'parquet')
 		hike_to_find = selected_suggestions
 		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
 
