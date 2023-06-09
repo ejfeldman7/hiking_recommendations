@@ -21,7 +21,7 @@ with open('./pickle_barrel/nmf_model.pkl', 'rb') as read_file:
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Home','Filter','Recommender']
+new_choice = ['Home','Visualizations','Filter','Recommender']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -46,7 +46,7 @@ else:
 #         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Home','Filter','Recommender'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Home','Visualizations','Filter','Recommender'), index=next_clicked)
 
 st.sidebar.write(
     '''
