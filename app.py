@@ -148,7 +148,7 @@ elif choice == 'Filter':
 	show_location_input = st.checkbox("Enter location")
 
 	# Process the input and geocoder	
-	if show_location_input:
+	# if show_location_input:
 
 		# # Create a geocoder instance
 		# geolocator = Nominatim(user_agent="my_geocoder")
