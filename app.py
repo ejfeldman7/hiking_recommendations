@@ -5,6 +5,8 @@ import os
 import pickle
 import sklearn
 from sklearn.metrics import pairwise_distances
+from geopy.geocoders import Nominatim
+
 
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -136,6 +138,40 @@ elif choice == 'Filter':
 	                 (df['Rating'] >= rating_value[0]) & (df['Rating'] <= rating_value[1]) &
 	                 (df['Difficulty'].isin(selected_difficulty)) &
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
+
+	# Add a checkbox to show/hide the location input fields
+	show_location_input = st.checkbox("Enter location")
+
+	# Process the input and geocoder	
+	if show_location_input:
+
+		# Create a geocoder instance
+		geolocator = Nominatim(user_agent="my_geocoder")
+
+		# Add an input field for city and state or zip code
+		location_input = st.text_input("Enter a city and state or a zip code:")
+
+		# Add an input field for the distance in kilometers
+		distance_input = st.number_input("Enter the distance in kilometers:", min_value=0)
+
+
+		# Process the input and geocode
+		if location_input:
+    		location = geolocator.geocode(location_input)
+    	if location is not None:
+            filtered_df = df[
+                df.apply(
+                    lambda row: haversine(
+                        (location.latitude, location.longitude),
+                        (row["latitude"], row["longitude"]),
+                        unit=Unit.KILOMETERS,
+                    )
+                    <= distance_input,
+                    axis=1,
+                )
+            ]
+    	else:
+        	st.write("Invalid location input")
 
 	# Display filtered results
 	st.dataframe(filtered_df)
