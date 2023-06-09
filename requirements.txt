@@ -9,4 +9,4 @@ matplotlib
 seaborn
 geopy
 openai
-streamlit_chat
+streamlit-chat
