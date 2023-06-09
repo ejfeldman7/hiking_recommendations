@@ -204,7 +204,7 @@ elif choice == 'Visualizations':
 		# max_val = int(df[selected_feature].dropna().max().astype(str).str.split('.')[0])
 		bin_size = st.slider('Select bin size', min_value=0, max_value=20, value=10)  # Adjust the min/max values as needed
 
-		freq, bins = np.histogram(data[selected_feature], bins=bin_size)
+		freq, bins = np.histogram(data[selected_feature].dropna(), bins=bin_size)
 		fig, ax = plt.subplots()
 		ax.bar(bins[:-1], freq, width=np.diff(bins), align='edge')
 		st.pyplot(fig)
