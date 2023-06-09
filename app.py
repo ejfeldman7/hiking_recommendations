@@ -199,10 +199,14 @@ elif choice == 'Visualizations':
 	# 	plt.ylabel(y)
 	# 	st.pyplot()
 
-	if visualization_type == 'Bar Plot':
+	if visualization_type == 'Frequency Plot/Histogram':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
-		freq = data[selected_feature].value_counts()
-		st.bar_chart(freq)
+		bin_size = st.slider('Select bin size', min_value=data[selected_feature].min(), max_value=data[selected_feature].max(), value=10)  # Adjust the min/max values as needed
+
+		freq, bins = np.histogram(data[selected_feature], bins=bin_size)
+		fig, ax = plt.subplots()
+		ax.bar(bins[:-1], freq, width=np.diff(bins), align='edge')
+		st.pyplot(fig)
 
 	elif chart_type == 'Scatter Plot':
 		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
