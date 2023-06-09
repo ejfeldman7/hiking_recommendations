@@ -40,6 +40,6 @@ def scaler(df, scaler_type: object, numeric_cols: list, object_cols: list, tag_c
 	new_df = pd.concat([new_df, object_features], axis=1)
 
 	# One-hot encoding of tags
-	tags = df[tag_cols].str.join('|').str.get_dummies()
+	tags = pd.concat([df[col].apply(pd.Series).stack().str.get_dummies().sum(level=0) for col in tag_cols], axis=1)
 
 	return pd.concat([new_df, tags], axis=1)
