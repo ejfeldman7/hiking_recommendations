@@ -225,6 +225,12 @@ elif choice == 'Visualizations':
 
 	elif visualization_type == 'Box Plot':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
+		if selected_feature == 'Length':
+			data = data[data[selected_feature] < 20]
+			st.write('Limited visual to trails under 20 miles')
+		elif selected_feature == 'Elevation Gain':
+			data = data[data[selected_feature] < 5000]
+			st.write('Limited visual to trails under 5k ft gained')		
 		sns.boxplot(data=data, x=selected_feature)
 		st.set_option('deprecation.showPyplotGlobalUse', False)
 		st.pyplot()
