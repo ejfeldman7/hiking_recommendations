@@ -280,6 +280,6 @@ elif choice == 'Recommender':
 			st.write('For more information, visit:',text_df.iloc[recs[0]]['Hike ID'])
 
 			st.write('Or, another option I would recommend you try is:',text_df.iloc[recs[1]]['Name'],'\n\n','It could be desribed as:','\n',text_df.iloc[recs[1]].Description)
-			st.write('For more information, visit:',,text_df.iloc[recs[1]]['Hike ID'],'\n')
+			st.write('For more information, visit:',text_df.iloc[recs[1]]['Hike ID'],'\n')
 			st.write('Other choices include:' " ,".join(list(text_df.iloc[recs[2:5]]['Hike ID'])))
 
