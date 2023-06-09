@@ -14,7 +14,7 @@ import plotly.express as px
 import seaborn as sns
 
 from utils.processing import scaler
-from utils.feature_lists import object_cols, numeric_cols, tags_cols
+from utils.feature_lists import object_cols, numeric_cols, tag_cols
 
 
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
@@ -250,7 +250,7 @@ elif choice == 'Recommender':
 		input_index = df[df.Name == hike_to_find].index[0]
 
 		# Select the features to use for distance calculation
-		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tags_cols = tags_cols)
+		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tag_cols = tag_cols)
 
 		# Create the input vector from the transformed dataframe
 		input_vector = features_df.iloc[input_index]
