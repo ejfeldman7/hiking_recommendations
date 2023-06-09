@@ -3,9 +3,6 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import pairwise_distances
 
-numeric_cols = ['Rating', 'Votes', 'Length', 'Elevation Gain', 'Highest Point']
-object_cols = ['General Region', 'Specific Region', 'One Way', 'Round Trip']
-tags_col = 'Tags'
 
 def scaler(df, scaler_type = 'MinMax', numeric_cols: list, object_cols: list, tag_cols: list):
 	'''
@@ -44,5 +41,5 @@ def scaler(df, scaler_type = 'MinMax', numeric_cols: list, object_cols: list, ta
 
 	# One-hot encoding of tags
 	tags = df[tags_col].str.join('|').str.get_dummies()
+
 	return pd.concat([new_df, tags], axis=1)
-	

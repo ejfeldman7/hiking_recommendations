@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
 
-from .utils.processing import scaler
-from .utils.feature_lists import object_cols, numeric_cols, tags_cols
+from utils.processing import scaler
+from utils.feature_lists import object_cols, numeric_cols, tags_cols
 
 
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
