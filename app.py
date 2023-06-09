@@ -150,8 +150,8 @@ elif choice == 'Visualizations':
 
 	# Example: Selectbox to choose the feature
 	if visualization_type == 'Line Plot':
-		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']))
-		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']))
+		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
+		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
 		plt.plot(data[x], data[y])
 		plt.xlabel(x)
 		plt.ylabel(y)
