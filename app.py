@@ -282,8 +282,8 @@ elif choice == 'Recommender':
 		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tag_cols = tag_cols)
 
 		# Weight some features more heavily
-		features_df['Length'] = features_df['Length'] * 4 * length_multiplier
-		features_df['Elevation Gain'] = features_df['Elevation Gain'] * 8 * elevation_multiplier
+		features_df['Length'] = features_df['Length'] * 4 * length_mult
+		features_df['Elevation Gain'] = features_df['Elevation Gain'] * 8 * elevation_mult
 
 		# Create the input vector from the transformed dataframe
 		input_vector = features_df.iloc[input_index].values
