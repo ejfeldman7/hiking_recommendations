@@ -203,7 +203,12 @@ elif choice == 'Visualizations':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
 		# max_val = int(df[selected_feature].dropna().max().astype(str).str.split('.')[0])
 		bin_size = st.slider('Select bin size', min_value=0, max_value=20, value=10)  # Adjust the min/max values as needed
-
+		if selected_feature == 'Length':
+			data = data[data[selected_feature] < 50]
+			st.write('Limited visual to trails under 50 miles')
+		elif selected_feature == 'Elevation Gain':
+			data = data[data[selected_feature] < 10000]
+			st.write('Limited visual to trails under 10k gained')
 		freq, bins = np.histogram(data[selected_feature].dropna(), bins=bin_size)
 		fig, ax = plt.subplots()
 		ax.bar(bins[:-1], freq, width=np.diff(bins), align='edge')
