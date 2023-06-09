@@ -152,7 +152,7 @@ elif choice == 'Visualizations':
 	if visualization_type == 'Line Plot':
 		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']))
 		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']))
-		plt.plot(df[x], df[y])
+		plt.plot(data[x], data[y])
 		plt.xlabel(x)
 		plt.ylabel(y)
 		st.pyplot()
