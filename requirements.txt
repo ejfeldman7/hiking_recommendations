@@ -8,3 +8,4 @@ plotly
 matplotlib
 seaborn
 geopy
+openai
