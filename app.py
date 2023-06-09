@@ -261,7 +261,7 @@ elif choice == 'Recommender':
 		distances = pairwise_distances(input_vector.reshape(1, -1), features_df.values)
 
 		# Get the indices of the 25 closest records
-		closest_indices = np.argsort(distances.flatten())[1:25]
+		closest_indices = np.argsort(distances.flatten())[1:10]
 
 		# Get the closest records from the dataframe using the extracted index
 		closest_records = df.iloc[closest_indices]
@@ -273,7 +273,7 @@ elif choice == 'Recommender':
 
 		## Find Recommendations By Topic Model
 		indices = pairwise_distances(tt1.reshape(1,-1),nmf_features[closest_indices],metric='cosine').argsort()
-		recs = list(indices[0][1:4])
+		recs = list(indices[0][1:5])
 
 		if len(text_df.iloc[recs[0]]['Name'])>1:
 			st.write('Based on your input hike, I recommend you try:','\n\n',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n\n',text_df.iloc[recs[0]].Description)
@@ -281,4 +281,5 @@ elif choice == 'Recommender':
 
 			st.write('Or, another option I would recommend you try is:','\n\n',text_df.iloc[recs[1]]['Name'],'\n\n','It could be desribed as:','\n\n',text_df.iloc[recs[1]].Description)
 			st.write('For more information, visit:','\n\n',text_df.iloc[recs[1]]['Hike ID'])
+			st.write('Other choices include:' " ,".join(list(text_df.iloc[recs[2:5]]['Hike ID'])))
 
