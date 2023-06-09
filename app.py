@@ -217,7 +217,12 @@ elif choice == 'Visualizations':
 	elif visualization_type == 'Scatter Plot':
 		x = st.selectbox('Select the x-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
 		y = st.selectbox('Select the y-axis variable:', data.select_dtypes(include=['int', 'float']).columns)
-
+		if x == 'Length' or y == 'Length':
+			data = data[data[selected_feature] < 20]
+			st.write('Limited visual to trails under 20 miles')
+		elif x == 'Elevation Gain' or y == 'Elevation Gained':
+			data = data[data[selected_feature] < 5000]
+			st.write('Limited visual to trails under 5k ft gained')		
 		plt.scatter(df[x], df[y])
 		plt.xlabel(x)
 		plt.ylabel(y)
