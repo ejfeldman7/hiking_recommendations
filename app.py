@@ -161,17 +161,6 @@ elif choice == 'Visualizations':
 		selected_feature = st.selectbox('Select a feature', data.columns)
 		freq = data[selected_feature].value_counts()
 		st.bar_chart(freq)
-		
-
-	# Example: Line plot
-	if visualization_type == 'Line Plot':
-	    plt.plot(data[selected_feature])
-	    st.pyplot(plt)
-
-	# Example: Bar plot
-	if visualization_type == 'Bar Plot':
-	    fig = px.bar(data, x=data.index, y=selected_feature)
-	    st.plotly_chart(fig)
 
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')
