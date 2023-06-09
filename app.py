@@ -257,6 +257,7 @@ elif choice == 'Recommender':
 	user_input = st.text_input('Type Here')
 
 	# Filter the dataframe based on the user input
+	df = df.dropna()
 	filtered_df = df[df['Name'].str.contains(user_input, case=False)]
 
 	# Extract the suggestions from the filtered dataframe
