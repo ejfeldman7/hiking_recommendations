@@ -223,7 +223,7 @@ elif choice == 'Visualizations':
 		elif x == 'Elevation Gain' or y == 'Elevation Gained':
 			data = data[data[y] < 5000]
 			st.write('Limited visual to trails under 5k ft gained')		
-		plt.scatter(df[x], df[y])
+		plt.scatter(data[x], data[y])
 		plt.xlabel(x)
 		plt.ylabel(y)
 		st.pyplot()
