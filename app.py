@@ -88,7 +88,7 @@ if choice == 'Home':
 elif choice == 'Filter':
 
 	df = pd.read_parquet('./data/hikes_geo.parquet')
-	st.dataframe(df)
+	# st.dataframe(df)
 	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
 	st.markdown("##### Numeric Filters")
@@ -149,14 +149,14 @@ elif choice == 'Filter':
 	# Add a checkbox to show/hide the location input fields
 	show_location_input = st.checkbox("Enter location")
 
-	# Process the input and geocoder	
-	# if show_location_input:
+	Process the input and geocoder	
+	if show_location_input:
 
-	# 	# Create a geocoder instance
-	# 	geolocator = Nominatim(user_agent="my_geocoder")
+		# Create a geocoder instance
+		geolocator = Nominatim(user_agent="my_geocoder")
 
-	# 	# Add an input field for city and state or zip code
-	# 	location_input = st.text_input("Enter a city and state or a zip code:")
+		# Add an input field for city and state or zip code
+		location_input = st.text_input("Enter a city and state or a zip code:")
 
 	# 	# Add an input field for the distance in kilometers
 	# 	distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
