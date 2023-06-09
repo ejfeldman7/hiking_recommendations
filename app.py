@@ -87,7 +87,7 @@ if choice == 'Home':
     
 elif choice == 'Filter':
 
-	df = pd.read_parquet('./data/hikes_geo.parquet')
+	df = pd.read_parquet('./data/hikes.parquet')
 	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
 	st.markdown("##### Numeric Filters")
@@ -142,41 +142,42 @@ elif choice == 'Filter':
 	                 (df['Elevation Gain'] >= gain_value[0]) & (df['Elevation Gain'] <= gain_max) &
 	                 (df['Rating'] >= rating_value[0]) & (df['Rating'] <= rating_value[1]) &
 	                 (df['Difficulty'].isin(selected_difficulty)) &
-	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
+	                 (df['General Region'].isin(selected_regions)) & 
+	                 (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Add a checkbox to show/hide the location input fields
 	show_location_input = st.checkbox("Enter location")
 
 	# Process the input and geocoder	
-	if show_location_input:
+	# if show_location_input:
 
-		# Create a geocoder instance
-		geolocator = Nominatim(user_agent="my_geocoder")
+	# 	# Create a geocoder instance
+	# 	geolocator = Nominatim(user_agent="my_geocoder")
 
-		# Add an input field for city and state or zip code
-		location_input = st.text_input("Enter a city and state or a zip code:")
+	# 	# Add an input field for city and state or zip code
+	# 	location_input = st.text_input("Enter a city and state or a zip code:")
 
-		# Add an input field for the distance in kilometers
-		distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
+	# 	# Add an input field for the distance in kilometers
+	# 	distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
 
-		# Process the input and geocode
-		if location_input and distance_input_miles:
-			location = geolocator.geocode(location_input)
-		if location is not None:
-			distance_input_km = distance_input_miles * 1.60934
-			filtered_df = df[
-				df.apply(
-					lambda row: haversine(
-						(location.latitude, location.longitude),
-						(row["latitude"], row["longitude"]),
-						unit=Unit.MIL,
-					)
-					<= distance_input_km,
-					axis=1,
-				)
-			]
-		else:
-			st.write("Invalid location input")
+	# 	# Process the input and geocode
+	# 	if location_input and distance_input_miles:
+	# 		location = geolocator.geocode(location_input)
+	# 	if location is not None:
+	# 		distance_input_km = distance_input_miles * 1.60934
+	# 		filtered_df = df[
+	# 			df.apply(
+	# 				lambda row: haversine(
+	# 					(location.latitude, location.longitude),
+	# 					(row["latitude"], row["longitude"]),
+	# 					unit=Unit.MIL,
+	# 				)
+	# 				<= distance_input_km,
+	# 				axis=1,
+	# 			)
+	# 		]
+	# 	else:
+	# 		st.write("Invalid location input")
 
 	# Display filtered results
 	st.dataframe(filtered_df)
