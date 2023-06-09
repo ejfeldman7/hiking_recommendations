@@ -220,7 +220,7 @@ elif choice == 'Visualizations':
 		if x == 'Length' or y == 'Length':
 			data = data[data[x] < 20]
 			st.write('Limited visual to trails under 20 miles')
-		elif x == 'Elevation Gain' or y == 'Elevation Gained':
+		elif x == 'Elevation Gain' or y == 'Elevation Gain':
 			data = data[data[y] < 5000]
 			st.write('Limited visual to trails under 5k ft gained')		
 		plt.scatter(data[x], data[y])
