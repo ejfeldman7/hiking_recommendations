@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 
 def load_data(filepath, file_type):
 	@st.cache_data
@@ -7,4 +8,3 @@ def load_data(filepath, file_type):
 	elif file_type == 'csv':
 		df = pd.read_csv(filepath)
 	return df
-		./data/hikes.parquet
