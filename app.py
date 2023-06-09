@@ -32,7 +32,7 @@ with open('./pickle_barrel/nmf_model.pkl', 'rb') as read_file:
 
 # will use this list and next button to increment page, MUST BE in the SAME order
 # as the list passed to the radio button
-new_choice = ['Home','Visualizations','Filter','Recommender']
+new_choice = ['Home','Visualizations','Filter','Recommender','Chat HikeGPT']
 
 # This is what makes this work, check directory for a pickled file that contains
 # the index of the page you want displayed, if it exists, then you pick up where the
@@ -57,7 +57,7 @@ else:
 #         next_clicked = 0 # go back to the beginning i.e. homepage
 
 # create your radio button with the index that we loaded
-choice = st.sidebar.radio("go to",('Home','Visualizations','Filter','Recommender'), index=next_clicked)
+choice = st.sidebar.radio("go to",('Home','Visualizations','Filter','Recommender','Chat HikeGPT'), index=next_clicked)
 
 st.sidebar.write(
     '''
@@ -81,8 +81,10 @@ if choice == 'Home':
     '''
     '''
     1. This is the __Home Page__
-    2. Use the __Filter__ page to sort through hikes by a variety of factors
-    3. Use the __Recommender__ app to get a hike recommendation based on your favorite hike
+    2. Use the __Visualization__ page to dig a little deeper in data about the hikes
+    3. Use the __Filter__ page to sort through hikes by a variety of factors
+    4. Use the __Recommender__ app to get a hike recommendation based on your favorite hike
+    5. Use the __Chat HikeGTP__ page if you have an OpenAI API key to chat!
     \r\n
     This site was created by Ethan Feldman. You can find him on [GitHub](https://github.com/ejfeldman7), [LinkedIn](https://www.linkedin.com/in/feldmanethan/),
     [Medium/TDS](https://ethan-feldman.medium.com/) and on his [website](https://www.ejfeldman.com/)  \r\n
@@ -316,13 +318,9 @@ elif choice == 'Recommender':
 
 elif choice == 'Chat HikeGPT':
 
-
-	with st.sidebar:
-		openai_api_key = st.text_input('OpenAI API Key',key='chatbot_api_key')
-		"[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
-		"[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
-
-	st.title("💬 Streamlit GPT")
+	openai_api_key = st.text_input('OpenAI API Key',key='chatbot_api_key')
+	
+	st.title("HikeChat Streamlit GPT")
 	#openai.api_key = st.secrets.openai_api_key
 	if "messages" not in st.session_state:
 		st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
