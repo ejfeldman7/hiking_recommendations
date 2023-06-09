@@ -87,7 +87,7 @@ if choice == 'Home':
     
 elif choice == 'Filter':
 
-	df = pd.read_parquet('./data/hikes_geo.parquet')
+	df = pd.read_parquet('./data/hikes.parquet')
 	# st.dataframe(df)
 	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
