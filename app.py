@@ -225,7 +225,7 @@ elif choice == 'Visualizations':
 
 	elif visualization_type == 'Box Plot':
 		selected_feature = st.selectbox('Select a feature', data.select_dtypes(include=['int', 'float']).columns)
-		sns.boxplot(data=data, x=feature)
+		sns.boxplot(data=data, x=selected_feature)
 		st.pyplot()
 
 elif choice == 'Recommender':
