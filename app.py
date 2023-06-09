@@ -6,11 +6,16 @@ import pickle
 import sklearn
 from sklearn.metrics import pairwise_distances
 from geopy.geocoders import Nominatim
+from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 
 
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
+
+from .utils.processing import scaler
+from .utils.feature_lists import object_cols, numeric_cols, tags_cols
+
 
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
     vectorizer = pickle.load(read_file)
@@ -239,15 +244,39 @@ elif choice == 'Recommender':
 		text_df = pd.read_parquet('./data/text_data.parquet')
 		hike_to_find = selected_suggestions
 		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
+
+		## Limit Recommendations By Hike Features
+		# Select the input vector
+		input_index = df[df.Name == hike_to_find].index[0]
+
+		# Select the features to use for distance calculation
+		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols, object_cols, tags_cols)
+
+		# Create the input vector from the transformed dataframe
+		input_vector = features_df.iloc[input_index]
+
+		# Calculate pairwise distances between the input vector and all records in the dataframe
+		distances = pairwise_distances(features_df[features].values, input_vector.values)
+
+		# Get the indices of the 25 closest records
+		closest_indices = np.argsort(distances.flatten())[1:25]
+
+		# Get the closest records from the dataframe
+		closest_records = df.iloc[closest_indices]
+
+		# Filter NMF matrix to records above
 		nmf_features = nmf_model.transform(tfidf_matrix)
 		vt = vectorizer.transform(text).todense()
 		tt1 = nmf_model.transform(np.asarray(vt))
 
-	# #Find Recommendations
-		indices = pairwise_distances(tt1.reshape(1,-1),nmf_features,metric='cosine').argsort()
+		## Find Recommendations By Topic Model
+		indices = pairwise_distances(tt1.reshape(1,-1),nmf_features[closest_indices],metric='cosine').argsort()
 		recs = list(indices[0][1:4])
 
 		if len(text_df.iloc[recs[0]]['Name'])>1:
 			st.write('Based on your input hike, I recommend you try:','\n\n',text_df.iloc[recs[0]]['Name'],'\n\n','It could be desribed as:','\n\n',text_df.iloc[recs[0]].Description)
 			st.write('For more information, visit:','\n\n',text_df.iloc[recs[0]]['Hike ID'])
+
+			st.write('Or, another option I would recommend you try is:','\n\n',text_df.iloc[recs[1]]['Name'],'\n\n','It could be desribed as:','\n\n',text_df.iloc[recs[1]].Description)
+			st.write('For more information, visit:','\n\n',text_df.iloc[recs[1]]['Hike ID'])
 
