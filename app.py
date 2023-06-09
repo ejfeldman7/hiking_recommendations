@@ -6,6 +6,9 @@ import pickle
 import sklearn
 from sklearn.metrics import pairwise_distances
 
+import matplotlib.pyplot as plt
+import plotly.express as px
+
 with open('./pickle_barrel/vectorizer.pkl', 'rb') as read_file:
     vectorizer = pickle.load(read_file)
 with open('./pickle_barrel/tfidf_matrix.pkl', 'rb') as read_file:
@@ -134,7 +137,27 @@ elif choice == 'Filter':
 	                 (df['General Region'].isin(selected_regions)) & (df['Tags'].apply(lambda x: any(tag in selected_tags for tag in x)))]
 
 	# Display filtered results
-	st.dataframe(filtered_df)
+	st.dataframe(filtered_df
+
+elif choice == 'Visualizations':
+	df = pd.read_parquet('./data/hikes.parquet')
+	data = df[['General Region','Specific Region','Rating','Votes','Length','Elevation Gain',
+ 		'One Way','Round Trip','Highest Point','Tags', 'Difficulty']]
+	# Example: Selectbox to choose the feature
+	selected_feature = st.selectbox('Select a feature', data.columns)
+
+	# Example: Radio buttons to choose the visualization type
+	visualization_type = st.radio('Select visualization type', ['Line Plot', 'Bar Plot'])
+
+	# Example: Line plot
+	if visualization_type == 'Line Plot':
+	    plt.plot(data[selected_feature])
+	    st.pyplot(plt)
+
+	# Example: Bar plot
+	if visualization_type == 'Bar Plot':
+	    fig = px.bar(data, x=data.index, y=selected_feature)
+	    st.plotly_chart(fig)
 
 elif choice == 'Recommender':
 	df = pd.read_parquet('./data/hikes.parquet')

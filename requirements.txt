@@ -4,3 +4,4 @@ nltk
 pandas<2.*
 numpy
 scikit-learn
+plotly
