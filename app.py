@@ -255,7 +255,7 @@ elif choice == 'Recommender':
 		input_vector = features_df.iloc[input_index]
 
 		# Calculate pairwise distances between the input vector and all records in the dataframe
-		distances = pairwise_distances(features_df.values, input_vector.values)
+		distances = pairwise_distances(features_df.dropna().values, input_vector.values)
 
 		# Get the indices of the 25 closest records
 		closest_indices = np.argsort(distances.flatten())[1:25]
