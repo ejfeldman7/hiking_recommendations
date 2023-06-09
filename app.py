@@ -268,8 +268,8 @@ elif choice == 'Recommender':
 	else:
 		selected_suggestions = st.selectbox('Suggestions', suggestions)
 		st.write(f'Searching for recommendation based off of {selected_suggestions}...')
-		elevation_mult = st.slider('How important is having a similar elevation_gain?', 0.1, 5, 3)
-		length_mult = st.slider('How important is having a similar length of hike?', 0.1, 5, 3)
+		elevation_mult = st.slider('How important is having a similar elevation_gain?', 0, 5, 3)
+		length_mult = st.slider('How important is having a similar length of hike?', 0, 5, 3)
 		text_df = load_data('./data/text_data.parquet', 'parquet')
 		hike_to_find = selected_suggestions
 		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
