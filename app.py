@@ -87,7 +87,7 @@ if choice == 'Home':
     
 elif choice == 'Filter':
 
-	df = pd.read_parquet('./data/hikes.parquet')
+	df = pd.read_parquet('./data/hikes_geo.parquet')
 	st.markdown("##### Filter by the Option Below to Reveal Potential Hikes")
 	# Create sliders for numeric fields
 	st.markdown("##### Numeric Filters")
@@ -147,36 +147,36 @@ elif choice == 'Filter':
 	# Add a checkbox to show/hide the location input fields
 	show_location_input = st.checkbox("Enter location")
 
-	# Process the input and geocoder	
-	# if show_location_input:
+	Process the input and geocoder	
+	if show_location_input:
 
-		# # Create a geocoder instance
-		# geolocator = Nominatim(user_agent="my_geocoder")
+		# Create a geocoder instance
+		geolocator = Nominatim(user_agent="my_geocoder")
 
-		# # Add an input field for city and state or zip code
-		# location_input = st.text_input("Enter a city and state or a zip code:")
+		# Add an input field for city and state or zip code
+		location_input = st.text_input("Enter a city and state or a zip code:")
 
-		# # Add an input field for the distance in kilometers
-		# distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
+		# Add an input field for the distance in kilometers
+		distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
 
-		# # Process the input and geocode
-		# if location_input and distance_input_miles:
-		# 	location = geolocator.geocode(location_input)
-		# if location is not None:
-		# 	distance_input_km = distance_input_miles * 1.60934
-		# 	filtered_df = df[
-		# 		df.apply(
-		# 			lambda row: haversine(
-		# 				(location.latitude, location.longitude),
-		# 				(row["latitude"], row["longitude"]),
-		# 				unit=Unit.MIL,
-		# 			)
-		# 			<= distance_input_km,
-		# 			axis=1,
-		# 		)
-		# 	]
-		# else:
-		# 	st.write("Invalid location input")
+		# Process the input and geocode
+		if location_input and distance_input_miles:
+			location = geolocator.geocode(location_input)
+		if location is not None:
+			distance_input_km = distance_input_miles * 1.60934
+			filtered_df = df[
+				df.apply(
+					lambda row: haversine(
+						(location.latitude, location.longitude),
+						(row["latitude"], row["longitude"]),
+						unit=Unit.MIL,
+					)
+					<= distance_input_km,
+					axis=1,
+				)
+			]
+		else:
+			st.write("Invalid location input")
 
 	# Display filtered results
 	st.dataframe(filtered_df)
@@ -262,6 +262,8 @@ elif choice == 'Recommender':
 	else:
 		selected_suggestions = st.selectbox('Suggestions', suggestions)
 		st.write(f'Searching for recommendation based off of {selected_suggestions}...')
+		elevation_mult = st.slider('How important is having a similar elevation_gain', 1, 5, 3)
+		length_mult = st.slider('How important is having a length of hike', 1, 5, 3)
 		text_df = pd.read_parquet('./data/text_data.parquet')
 		hike_to_find = selected_suggestions
 		text = [text_df[text_df.Name == hike_to_find]['cleaned_text'].iloc[0]]
@@ -274,8 +276,8 @@ elif choice == 'Recommender':
 		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tag_cols = tag_cols)
 
 		# Weight some features more heavily
-		features_df['Length'] = features_df['Length'] * 10
-		features_df['Elevation Gain'] = features_df['Elevation Gain'] * 20
+		features_df['Length'] = features_df['Length'] * 4 * length_multiplier
+		features_df['Elevation Gain'] = features_df['Elevation Gain'] * 8 * elevation_multiplier
 
 		# Create the input vector from the transformed dataframe
 		input_vector = features_df.iloc[input_index].values
