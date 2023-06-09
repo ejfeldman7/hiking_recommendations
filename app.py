@@ -251,6 +251,10 @@ elif choice == 'Recommender':
 		# Select the features to use for distance calculation
 		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = numeric_cols, object_cols = object_cols, tag_cols = tag_cols)
 
+		# Weight some features more heavily
+		features_df['Length'] = features_df['Length'] * 5
+		features_df['Elevation Gain'] = features_df['Elevation Gain'] * 10
+
 		# Create the input vector from the transformed dataframe
 		input_vector = features_df.iloc[input_index].values
 
