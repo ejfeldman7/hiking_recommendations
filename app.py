@@ -145,33 +145,33 @@ elif choice == 'Filter':
 	# Process the input and geocoder	
 	if show_location_input:
 
-		# Create a geocoder instance
-		geolocator = Nominatim(user_agent="my_geocoder")
+		# # Create a geocoder instance
+		# geolocator = Nominatim(user_agent="my_geocoder")
 
-		# Add an input field for city and state or zip code
-		location_input = st.text_input("Enter a city and state or a zip code:")
+		# # Add an input field for city and state or zip code
+		# location_input = st.text_input("Enter a city and state or a zip code:")
 
-		# Add an input field for the distance in kilometers
-		distance_input = st.number_input("Enter the distance in kilometers:", min_value=0)
+		# # Add an input field for the distance in kilometers
+		# distance_input_miles = st.number_input("Enter the distance in miles:", min_value=0)
 
-
-		# Process the input and geocode
-		if location_input:
-    		location = geolocator.geocode(location_input)
-    	if location is not None:
-            filtered_df = df[
-                df.apply(
-                    lambda row: haversine(
-                        (location.latitude, location.longitude),
-                        (row["latitude"], row["longitude"]),
-                        unit=Unit.KILOMETERS,
-                    )
-                    <= distance_input,
-                    axis=1,
-                )
-            ]
-    	else:
-        	st.write("Invalid location input")
+		# # Process the input and geocode
+		# if location_input and distance_input_miles:
+		# 	location = geolocator.geocode(location_input)
+		# if location is not None:
+		# 	distance_input_km = distance_input_miles * 1.60934
+		# 	filtered_df = df[
+		# 		df.apply(
+		# 			lambda row: haversine(
+		# 				(location.latitude, location.longitude),
+		# 				(row["latitude"], row["longitude"]),
+		# 				unit=Unit.MIL,
+		# 			)
+		# 			<= distance_input_km,
+		# 			axis=1,
+		# 		)
+		# 	]
+		# else:
+		# 	st.write("Invalid location input")
 
 	# Display filtered results
 	st.dataframe(filtered_df)
