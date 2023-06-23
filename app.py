@@ -249,6 +249,12 @@ elif choice == 'Visualizations':
 elif choice == 'Recommender':
 	df = load_data('./data/hikes.parquet', 'parquet')
 	st.markdown("# Get a Hike Recommendation")
+
+	# Create checkboxes for categorical fields
+	st.markdown("#### Select any region in which you'd like to include in recommendations")
+	regions = df['General Region'].unique()
+
+	selected_regions = st.multiselect("Regions", regions, default=regions)
 	st.markdown("##### First, type in the name of a hike and hit enter")
 	st.markdown("##### Then, select the hike from the drop down")
 
@@ -262,11 +268,6 @@ elif choice == 'Recommender':
 
 	# Extract the suggestions from the filtered dataframe
 	suggestions = filtered_df['Name'].tolist()
-
-	# Create checkboxes for categorical fields
-	st.markdown("##### Filter to a region")
-	regions = df['General Region'].unique()
-	selected_regions = st.multiselect("Regions", regions, default=regions)
 
 	# Show the suggestions as a multiselect or selectbox widget
 	if user_input == '': 
