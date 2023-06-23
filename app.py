@@ -263,6 +263,11 @@ elif choice == 'Recommender':
 	# Extract the suggestions from the filtered dataframe
 	suggestions = filtered_df['Name'].tolist()
 
+	# Create checkboxes for categorical fields
+	st.markdown("##### Filter to a region")
+	regions = df['General Region'].unique()
+	selected_regions = st.multiselect("Regions", regions, default=regions)
+
 	# Show the suggestions as a multiselect or selectbox widget
 	if user_input == '': 
 		st.write('''Excited to recommend a hike for you!''') 
@@ -278,7 +283,7 @@ elif choice == 'Recommender':
 		## Limit Recommendations By Hike Features
 		# Select the input vector
 		input_index = df[df.Name == hike_to_find].index[0]
-
+		
 		# Select the features to use for distance calculation , 
 		features_df = scaler(df, scaler_type = 'MinMax', numeric_cols = fewer_numeric, object_cols = fewer_object, tag_cols = tag_cols)
 
@@ -291,9 +296,12 @@ elif choice == 'Recommender':
 
 		# Remove rows with null values
 		features_df = features_df.dropna()
+		
+		# Filter to selected region(s)
+		filtered_df = features_df[(features_df['General Region'].isin(selected_regions))] 
 
 		# Calculate pairwise distances between the input vector and all records in the dataframe
-		distances = pairwise_distances(input_vector.reshape(1, -1), features_df.values)
+		distances = pairwise_distances(input_vector.reshape(1, -1), filtered_df.values)
 
 		# Get the indices of the 25 closest records
 		closest_indices = np.argsort(distances.flatten())[1:10]
