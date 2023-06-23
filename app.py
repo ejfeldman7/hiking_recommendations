@@ -255,8 +255,8 @@ elif choice == 'Recommender':
 	regions = df['General Region'].unique()
 
 	selected_regions = st.multiselect("Regions", regions, default=regions)
-	st.markdown("##### First, type in the name of a hike and hit enter")
-	st.markdown("##### Then, select the hike from the drop down")
+	st.markdown("##### Then, type in the name of a hike you like to use for reference and hit enter")
+	st.markdown("##### Finally, select the hike from the drop down")
 
 	# Create a text entry field
 	user_input = ''
