@@ -252,10 +252,10 @@ elif choice == 'Recommender':
 
 	# Create checkboxes for categorical fields
 	st.markdown("#### Select any region in which you'd like to include in recommendations")
-	regions = df['General Region'].unique()
+	regions = df.dropna()['General Region'].unique()
 
 	selected_regions = st.multiselect("Regions", regions, default=regions)
-	st.markdown("##### Then, type in the name of a hike you like to use for reference and hit enter")
+	st.markdown("##### Then, type in the name of a hike you'd like to use as a reference and hit enter")
 	st.markdown("##### Finally, select the hike from the drop down")
 
 	# Create a text entry field
