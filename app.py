@@ -300,7 +300,7 @@ elif choice == 'Recommender':
 		
 		# Filter to selected region(s)
 		# filtered_df = features_df[(features_df['General Region'].isin(selected_regions))] 
-		filtered_df = features_df[(features_df[encoded_regions]=='1').any(axis='columns')]
+		filtered_df = features_df[(features_df[encoded_regions]==1).any(axis='columns')]
 
 		# Calculate pairwise distances between the input vector and all records in the dataframe
 		distances = pairwise_distances(input_vector.reshape(1, -1), filtered_df.values)
