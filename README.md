@@ -11,3 +11,8 @@ Recommendations are them made by finding them closest hike to a user specified r
 ## Deployment 
 Datasets, NMF model, and recommendation pipeline were deployed using [Streamlit](https://ejfeldman7-hiking-recommendations-app-4kri38.streamlit.app/), along with a few additional pages for exploring hikes. 
 
+## Organization 
+- Data can be found in the folder titled data
+- Pickled copies of the NMF model and TFIDF vectorizer are found in the pickle_barrel
+- The code for the Streamlit application can be found in app.py, along with some utility functions in the utils folder
+
